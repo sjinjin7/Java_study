@@ -7,6 +7,16 @@ public class Criteria {
 	// 한 페이지당 데이터 처리 갯수(10개)
 		private int amount;
 		
+		private String keyword;
+		
+		public String getKeyword() {
+			return keyword;
+		}
+
+		public void setKeyword(String keyword) {
+			this.keyword = keyword;
+		}
+
 		public Criteria() {// 기본생성자
 			this(1,10);
 		}

@@ -45,6 +45,7 @@ public class BoardController {
 		public void listGET(Criteria cri, Model model) throws Exception{
 			int total = bservice.boardCount();
 			PageVO pv = new PageVO(cri, total);
+			logger.info("keyword="+cri.getKeyword());
 			logger.info("tpta; = " + total);
 			logger.info("bservice.boardListPaging()" + bservice.boardListPaging(cri));
 			model.addAttribute("list",bservice.boardListPaging(cri));

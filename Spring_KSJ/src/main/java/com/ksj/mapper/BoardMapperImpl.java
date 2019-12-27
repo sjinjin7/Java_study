@@ -35,9 +35,14 @@ public class BoardMapperImpl implements BoardMapper {
 	@Override
 	public List<BoardVO> boardListPaging(Criteria cri) throws Exception {
 		List list = sqlSession.selectList(namespace+".boardListPage", cri);
-		return null;
+		return list;
 	}
 	
+	@Override
+	public int boardCount() throws Exception {
+		int bcnt = sqlSession.selectOne(namespace+".boardCount");
+		return bcnt;
+	}
 	
 	@Override
 	public BoardVO boardDetail(int number) throws Exception{
@@ -68,6 +73,8 @@ public class BoardMapperImpl implements BoardMapper {
 		
 		sqlSession.delete(namespace+".boardDel",number);
 	}
+
+
 
 	
 

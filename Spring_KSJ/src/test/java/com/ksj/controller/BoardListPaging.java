@@ -23,6 +23,10 @@ public class BoardListPaging {
 		@Test
 		public void testPaging() throws Exception {
 			Criteria cri = new Criteria();
+			
+//			cri.setPageNum(3);
+//			cri.setAmount(10);
+//			
 	
 			List<BoardVO> list = boardservice.boardListPaging(cri);
 			

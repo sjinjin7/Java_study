@@ -3,39 +3,56 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ksj.mapper.BoardMapper">
+	
+	<!-- 페이징 처리하지 않은 전체 목록 리스트 -->
 	<select id="boardList" resultType="com.ksj.model.BoardVO">
 	
 		select * from board;
 	
 	</select>
-	
+	<!-- 페이징 처리한 전체 목록 리스트 -->
 	<select id="boardListPage" resultType="com.ksj.model.BoardVO">
 	<![CDATA[
 	
 		select number, subject, name, DateInserted, cnt 
 		from(select @rownum:=@rownum+1 as rownum, number, subject, name, DateInserted, cnt from (select @rownum:=0) as rownum, board order by number desc) board 
-		where rownum >=#{pageNum} and rownum<=#{amount} ;
-	]]>
-	
+		where rownum >(#{pageNum}-1)*#{amount} and rownum<=#{pageNum}*#{amount} ;
 		
+	]]>
 	
 	</select>
 	
 	
+	
+	<!-- Board테이블의 레코드 갯수 -->
+	<select id="boardCount" resultType="int">
+	<![CDATA[
+		select count(*) from board;
+	]]>
+	
+	</select>
+	
+	<!-- 제목을 클릭했을시 내용 상세 -->
 	<select id="boardDetail" resultType="com.ksj.model.BoardVO">
 	
 		select * from board where number = #{number};
 	
 	</select>
+	
+	
+	<!-- 글쓰기 -->
 	<insert id="boardWrite">
 		insert into board(subject, name, content, cnt) 
 		values(#{subject},#{name}, #{content}, #{cnt})
 	</insert>
+	<!-- 글수정 -->
 	<update id="boardModify">
 		update board set subject = #{subject}
 		, content = #{content} 
 		where number = #{number};
 	</update>
+	
+	<!-- 글삭제-->
 	<delete id="boardDel">
 		delete from board where number = #{number};
 	</delete>

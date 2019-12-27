@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ksj.model.BoardVO;
+import com.ksj.model.Criteria;
+import com.ksj.model.PageVO;
 import com.ksj.service.BoardService;
 
 @Controller
@@ -25,21 +27,36 @@ public class BoardController {
 			
 	
 		/*게시글 목록 리스트*/
-		@RequestMapping(value = "/list", method = RequestMethod.GET)
-		public void listGET(Model model) throws Exception{
+		//@RequestMapping(value = "/list", method = RequestMethod.GET)
+		//public void listGET(Model model) throws Exception{
 				
 		/* logger.info("list 결과=" + bservice.boardList()); *///select 전체목록
 			//select 전체 목록을 Model객체에 저장후 list.jsp에 실어서 보낸다.
-			model.addAttribute("list", bservice.boardList());
-			
-			
+		//	model.addAttribute("list", bservice.boardList());
 			
 			
 		/* return "board/list"; */
 				
+	//	}
+	
+	
+		//페이징된 게시글 목록 리스트
+		@RequestMapping(value = "/list", method = RequestMethod.GET)
+		public void listGET(Criteria cri, Model model) throws Exception{
+			int total = bservice.boardCount();
+			PageVO pv = new PageVO(cri, total);
+			logger.info("tpta; = " + total);
+			logger.info("bservice.boardListPaging()" + bservice.boardListPaging(cri));
+			model.addAttribute("list",bservice.boardListPaging(cri));
+			model.addAttribute("page",  pv);
+			
+		
+				
 		}
-	
-	
+		
+		
+		
+		
 	
 		/* 글쓰기를 위한 controller */
 			@RequestMapping(value = "/register" , method = RequestMethod.GET)

@@ -164,7 +164,7 @@
           <!-- Topbar Search -->
           <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+              <input type="text"  value = "111"class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
               <div class="input-group-append">
                 <button class="btn btn-primary" type="button">
                   <i class="fas fa-search fa-sm"></i>
@@ -355,7 +355,6 @@
                     <tr>
                       <th>number</th>
                       <th>제목</th>
-                      <th>내용</th>
                       <th>글쓴이</th>
                       <th>작성일자</th>
                       <th>조회수</th>
@@ -368,14 +367,32 @@
                   	<tr>                  	
                   		<td>${board.number}</td>
                   		<td><a href="detail?bnum=${board.number}">${board.subject}</a></td>
-                  		<td>${board.content}</td>
                   		<td>${board.name}</td>
                   		<td>${board.dateinserted}</td>
                   		<td>${board.cnt}</td>
                   	</tr>
                   	</c:forEach>
                   	<tr>
-                  		<td colspan="6"><a href = "register">글쓰기</a></td>
+                  		<td><a href = "register">글쓰기</a></td>
+                  		<td colspan="4">
+                  		
+                  		<c:if test="${page.prev}">
+                  			<a href="list?pageNum=${page.startPage-1}&amount=10">이전</a>
+                  		</c:if>
+                  		
+                  		<c:forEach var="num" begin="${page.startPage}" end="${page.endPage}" >
+                  			<a href="list?pageNum=${num}&amount=${page.cri.amount}">${num}</a>
+                  		</c:forEach>
+                  		<c:if test="${page.next}">
+                  			<a href="list?pageNum=${page.endPage+1}&amount=10">다음</a>
+                  		</c:if>
+                  		
+                  		<!--
+                  		for(int i = ${startPage};i<${endPage};i++){
+                  		
+                  		}
+                  		                  		  -->
+                  		</td>
                   	</tr>
                 </table>
               </div>

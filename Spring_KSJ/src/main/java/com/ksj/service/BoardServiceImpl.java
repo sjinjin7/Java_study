@@ -58,4 +58,10 @@ public class BoardServiceImpl implements BoardService{
 		
 	}
 
+	@Override
+	public int boardCount() throws Exception {
+		
+		return bm.boardCount();
+	}
+
 }

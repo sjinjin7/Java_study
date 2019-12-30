@@ -59,9 +59,9 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public int boardCount() throws Exception {
+	public int boardCount(Criteria cri) throws Exception {
 		
-		return bm.boardCount();
+		return bm.boardCount(cri);
 	}
 
 }

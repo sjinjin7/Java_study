@@ -43,7 +43,7 @@ public class BoardController {
 		//페이징된 게시글 목록 리스트
 		@RequestMapping(value = "/list", method = RequestMethod.GET)
 		public void listGET(Criteria cri, Model model) throws Exception{
-			int total = bservice.boardCount();
+			int total = bservice.boardCount(cri);
 			PageVO pv = new PageVO(cri, total);
 			logger.info("keyword="+cri.getKeyword());
 			logger.info("tpta; = " + total);

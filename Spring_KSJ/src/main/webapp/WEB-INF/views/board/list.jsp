@@ -164,8 +164,14 @@
           <!-- Topbar Search -->
           <form action="list" method="get" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
-              <input type="text" name="keyword" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+            
+            	<input type="hidden" name="pageNum" value="${page.cri.getPageNum()}">
+            	<input type="hidden" name="amount" value="${page.cri.getAmount()}">
+            
+            
+              <input type="text" name="keyword"  class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
               <div class="input-group-append">
+                
               	<input  type = "submit" value="검색" class="btn btn-primary">
                 
               </div>
@@ -376,14 +382,14 @@
                   		<td colspan="4">
                   		
                   		<c:if test="${page.prev}">
-                  			<a href="list?pageNum=${page.startPage-1}&amount=10">이전</a>
+                  			<a href="list?pageNum=${page.startPage-1}&amount=${page.cri.amount}&keyword=${page.cri.keyword}">이전</a>
                   		</c:if>
                   		
                   		<c:forEach var="num" begin="${page.startPage}" end="${page.endPage}" >
-                  			<a href="list?pageNum=${num}&amount=${page.cri.amount}">${num}</a>
+                  			<a href="list?pageNum=${num}&amount=${page.cri.amount}&keyword=${page.cri.keyword}">${num}</a>
                   		</c:forEach>
                   		<c:if test="${page.next}">
-                  			<a href="list?pageNum=${page.endPage+1}&amount=10">다음</a>
+                  			<a href="list?pageNum=${page.endPage+1}&amount=${page.cri.amount}&keyword=${page.cri.keyword}">다음</a>
                   		</c:if>
                   		
                   		<!--

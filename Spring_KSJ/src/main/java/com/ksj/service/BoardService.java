@@ -14,7 +14,7 @@ public interface BoardService {
 	public List<BoardVO> boardListPaging(Criteria cri) throws Exception;
 	
 	
-	public int boardCount() throws Exception;
+	public int boardCount(Criteria cri) throws Exception;
 	
 	// 게시판 제목을 클릭하였을 경우
 	public BoardVO boardDetail(int number) throws Exception;

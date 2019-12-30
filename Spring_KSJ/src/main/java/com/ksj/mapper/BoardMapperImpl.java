@@ -39,8 +39,8 @@ public class BoardMapperImpl implements BoardMapper {
 	}
 	
 	@Override
-	public int boardCount() throws Exception {
-		int bcnt = sqlSession.selectOne(namespace+".boardCount");
+	public int boardCount(Criteria cri) throws Exception {
+		int bcnt = sqlSession.selectOne(namespace+".boardCount",cri);
 		return bcnt;
 	}
 	

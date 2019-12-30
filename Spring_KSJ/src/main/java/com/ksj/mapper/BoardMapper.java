@@ -14,7 +14,7 @@ public interface BoardMapper  {
 	public List<BoardVO> boardListPaging(Criteria cri) throws Exception;
 	
 	//Board테이블의 레코드 전체 갯수 : 페이징의 realEnd를 알기 위해서
-	public int boardCount() throws Exception; 
+	public int boardCount(Criteria cri) throws Exception; 
 	
 	
 	// 제목을 클릭했을 때 상세 페이지

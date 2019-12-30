@@ -5,13 +5,35 @@
 <mapper namespace="com.ksj.mapper.BoardMapper">
 	
 	<!-- 페이징 처리하지 않은 전체 목록 리스트 -->
-	<select id="boardList" resultType="com.ksj.model.BoardVO">
+	<!--<select id="boardList" resultType="com.ksj.model.BoardVO">
 	
 		select * from board;
+		
+	</select>-->
 	
-	</select>
+	
 	<!-- 페이징 처리한 전체 목록 리스트 -->
 	<select id="boardListPage" resultType="com.ksj.model.BoardVO">
+	
+	
+	
+	
+	
+		select number, subject, name, DateInserted, cnt 
+		from(select @rownum:=@rownum+1 as rownum, number, subject, name, DateInserted, cnt from (select @rownum:=0) as rownum, board 
+		<if test="keyword != null">
+		where subject like concat ('%',#{keyword},'%') 
+		</if>
+		order by number desc ) board 
+	<![CDATA[	
+		where rownum >(#{pageNum}-1)*#{amount} and rownum<=#{pageNum}*#{amount} ;
+	]]>
+	
+	</select>
+	
+	
+	<!-- 페이징 처리한 전체 목록 리스트 -->
+	<!--<select id="boardListPage" resultType="com.ksj.model.BoardVO">
 	<![CDATA[
 	
 		select number, subject, name, DateInserted, cnt 
@@ -20,15 +42,19 @@
 		
 	]]>
 	
-	</select>
+	</select>-->
 	
 	
 	
 	<!-- Board테이블의 레코드 갯수 -->
 	<select id="boardCount" resultType="int">
 	<![CDATA[
-		select count(*) from board;
+		select count(*) from board
 	]]>
+		<if test="keyword != null">
+		where subject like concat('%',#{keyword},'%')
+		</if>
+	
 	
 	</select>
 	

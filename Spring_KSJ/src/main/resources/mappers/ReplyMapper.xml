@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ksj.mapper.ReplyMapper">
+
+<insert id="repboardWrite">
+
+insert into tb1_reply(bno, replytext, replyer, regdate) 
+values(#{bno}, #{replytext}, #{replyer}, sysdate());
+
+</insert>
+
+
+
+<update id="repboardModify">
+
+update tb1_reply
+set replytext=#{replytext}, updatedate = sysdate() where rno=#{rno}; 
+</update>
+
+<select id="repboardList" resultType="com.ksj.model.ReplyVO">
+
+select * from tb1_reply
+where bno=#{bno};
+
+
+</select>
+
+<delete id="repboardDel">
+delete from tb1_reply
+where rno=#{rno};
+</delete>
+
+
+
+
+
+</mapper>

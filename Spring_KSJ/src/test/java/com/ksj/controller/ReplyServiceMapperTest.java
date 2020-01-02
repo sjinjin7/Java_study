@@ -58,7 +58,7 @@ public class ReplyServiceMapperTest {
 		
 	}*/
 	
-	@Test
+	/*@Test
 	public void testrepServiceDel() throws Exception {
 		ReplyVO rv	= new ReplyVO();
 		
@@ -68,7 +68,7 @@ public class ReplyServiceMapperTest {
 
 
 		
-	}
+	}*/
 	
 	
 }

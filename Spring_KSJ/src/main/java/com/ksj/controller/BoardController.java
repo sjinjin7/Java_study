@@ -115,8 +115,8 @@ public class BoardController {
 			
 			
 			
-			@RequestMapping(value = "/delete", method = RequestMethod.GET)
-			public String deleteGET(@RequestParam int bnum, Model model) throws Exception{
+		@RequestMapping(value = "/delete", method = RequestMethod.GET)
+		public String deleteGET(@RequestParam int bnum, Model model) throws Exception{
 				logger.info("delete GET......" + bnum);
 				bservice.boardDel(bnum);
 				
@@ -125,7 +125,12 @@ public class BoardController {
 			}
 	
 
-	
+	@RequestMapping(value = "/replyboard", method = RequestMethod.GET)
+	public void replyGET() throws Exception{
+		logger.info("replyboard GET......");
+		
+		//return "board/replyboard";
+	}
 	
 	
 	

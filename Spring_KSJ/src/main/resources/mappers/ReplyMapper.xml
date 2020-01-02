@@ -26,6 +26,39 @@ where bno=#{bno};
 
 
 </select>
+<!-- 페이징처리 -->
+<select id="repboardListPage" resultType="com.ksj.model.ReplyVO">
+
+select* 
+from(
+		select @rownum:=@rownum+1 as rownum, rno, bno, replytext, replyer, regdate, updatedate
+		from(select @rownum:=0) as rownum, tb1_reply
+<!--		<if test="bno != null">-->
+		where bno = #{bno} 
+	<!--	</if> -->
+		order by rno desc
+	) tb1_reply
+<![CDATA[	
+		where rownum >(#{cri.pageNum}-1)*#{cri.amount} and rownum<=#{cri.pageNum}*#{cri.amount} 
+	]]>
+
+</select>
+
+<!-- 댓글갯수 -->
+	<select id="Repcount" resultType="int">
+	<![CDATA[
+		select count(*) from tb1_reply
+	]]>
+		<!--<if test="bno != null">-->
+		where bno = #{bno}
+		<!--</if>-->
+	
+	
+	</select>
+
+
+
+
 
 <delete id="repboardDel">
 delete from tb1_reply

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ksj.mapper.ReplyMapper;
+import com.ksj.model.Criteria;
 import com.ksj.model.ReplyVO;
 
 @Service
@@ -15,9 +16,9 @@ public class ReplyServiceImpl implements ReplyService {
 	private ReplyMapper rm;
 	
 	@Override
-	public List<ReplyVO> RepList(ReplyVO vo) throws Exception {
+	public List<ReplyVO> RepList(int bno) throws Exception {
 		
-		return rm.list(vo);
+		return rm.Replist(bno);
 	}
 
 	@Override
@@ -34,9 +35,20 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public void RepDel(ReplyVO vo) throws Exception {
-		rm.RepDel(vo);
+	public void RepDel(int rno) throws Exception {
+		rm.RepDel(rno);
 		
+	}
+
+	@Override
+	public List<ReplyVO> ReplistPage(int bno, Criteria cri) throws Exception {
+		
+		return rm.ReplistPage(bno, cri);
+	}
+
+	@Override
+	public int RepCount(int bno) throws Exception {
+		return rm.Repcount(bno);
 	}
 
 
